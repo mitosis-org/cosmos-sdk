@@ -14,6 +14,7 @@ import (
 // BeginBlocker iterates through and handles any newly discovered evidence of
 // misbehavior submitted by CometBFT. Currently, only equivocation is handled.
 func (k Keeper) BeginBlocker(ctx context.Context) error {
+	k.Logger(sdk.UnwrapSDKContext(ctx)).Info("x/evidence: BeginBlocker")
 	defer telemetry.ModuleMeasureSince(types.ModuleName, telemetry.Now(), telemetry.MetricKeyBeginBlocker)
 
 	bi := k.cometInfo.GetCometBlockInfo(ctx)
