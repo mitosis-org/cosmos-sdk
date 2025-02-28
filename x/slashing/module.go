@@ -24,7 +24,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	"github.com/cosmos/cosmos-sdk/x/slashing/simulation"
 	"github.com/cosmos/cosmos-sdk/x/slashing/types"
-	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
 // ConsensusVersion defines the current x/slashing module consensus version.
@@ -224,7 +223,6 @@ type ModuleOutputs struct {
 
 	Keeper keeper.Keeper
 	Module appmodule.AppModule
-	Hooks  staking.StakingHooksWrapper
 }
 
 func ProvideModule(in ModuleInputs) ModuleOutputs {
@@ -239,6 +237,5 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 	return ModuleOutputs{
 		Keeper: k,
 		Module: m,
-		Hooks:  staking.StakingHooksWrapper{StakingHooks: k.Hooks()},
 	}
 }
