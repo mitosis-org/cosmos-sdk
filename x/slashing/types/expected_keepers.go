@@ -37,7 +37,6 @@ type ParamSubspace interface {
 
 type ValidatorI interface {
 	IsJailed() bool                          // whether the validator is jailed
-	IsUnbonded() bool                        // whether the validator is unbonded
 	ConsPubKey() (cryptotypes.PubKey, error) // validation consensus pubkey (cryptotypes.PubKey)
 	GetConsAddr() ([]byte, error)            // validation consensus address
 }

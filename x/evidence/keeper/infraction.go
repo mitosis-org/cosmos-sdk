@@ -33,7 +33,7 @@ func (k Keeper) handleEquivocationEvidence(ctx context.Context, evidence *types.
 	if err != nil {
 		return err
 	}
-	if validator == nil || validator.IsUnbonded() {
+	if validator == nil {
 		// Defensive: Simulation doesn't take unbonding periods into account, and
 		// CometBFT might break this assumption at some point.
 		return nil
