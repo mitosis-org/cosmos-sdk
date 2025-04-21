@@ -14,12 +14,18 @@ import (
 )
 
 type (
+	// ValidatorI expected validator interface
+	ValidatorI interface {
+		IsJailed() bool                          // whether the validator is jailed
+		ConsPubKey() (cryptotypes.PubKey, error) // validation consensus pubkey (cryptotypes.PubKey)
+		GetConsAddr() ([]byte, error)            // validation consensus address
+	}
+
 	// StakingKeeper defines the staking module interface contract needed by the
 	// evidence module.
 	StakingKeeper interface {
 		ConsensusAddressCodec() address.Codec
-		ValidatorByConsAddr(context.Context, sdk.ConsAddress) (stakingtypes.ValidatorI, error)
-		GetParams(ctx context.Context) (params stakingtypes.Params, err error)
+		ValidatorByConsAddr(context.Context, sdk.ConsAddress) (ValidatorI, error)
 	}
 
 	// SlashingKeeper defines the slashing module interface contract needed by the

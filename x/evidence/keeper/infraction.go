@@ -33,13 +33,14 @@ func (k Keeper) handleEquivocationEvidence(ctx context.Context, evidence *types.
 	if err != nil {
 		return err
 	}
-	if validator == nil || validator.IsUnbonded() {
+	if validator == nil {
 		// Defensive: Simulation doesn't take unbonding periods into account, and
 		// CometBFT might break this assumption at some point.
 		return nil
 	}
 
-	if len(validator.GetOperator()) != 0 {
+	// NOTE: It will be always true in the x/evmvalidator
+	if true /*len(validator.GetOperator()) != 0*/ {
 		if _, err := k.slashingKeeper.GetPubkey(ctx, consAddr.Bytes()); err != nil {
 			// Ignore evidence that cannot be handled.
 			//
